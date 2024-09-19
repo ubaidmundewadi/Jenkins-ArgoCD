@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: spring-boot-app
-        image: ubaidmundewadidocker/ultimate-cicd:replaceImageTag
+        image: ubaidmundewadidocker/ultimate-cicd:11
         ports:
         - containerPort: 8080
