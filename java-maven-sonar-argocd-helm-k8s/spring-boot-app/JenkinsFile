@@ -11,7 +11,7 @@ pipeline {
 
         stage('Static Code Analysis') {
             environment {
-            SONAR_URL = "http://172.31.29.21"
+            SONAR_URL = "http://172.31.23.237"
             }
 
             steps {
@@ -40,7 +40,7 @@ pipeline {
 
         stage('Update Deployment File') {
             environment {
-                GIT_REPO_NAME = "Jenkins-Zero-To-Hero"
+                GIT_REPO_NAME = "Jenkins-ArgoCD"
                 GIT_USER_NAME = "ubaidmundewadi"
             }
             steps {
@@ -49,8 +49,8 @@ pipeline {
                         git config user.email "mundewadiubaid@gmail.com"
                         git config user.name "Ubaid Mundewadi"
                         BUILD_NUMBER=${BUILD_NUMBER}
-                        sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
-                        git add java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
+                        sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" spring-boot-app-manifests/deployment.yml
+                        git add spring-boot-app-manifests/deployment.yml
                         git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                         git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
                     '''
